@@ -9,16 +9,44 @@ import {
   StatusBar,
   ScrollView,
   Dimensions,
+  ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ecopontoService, Ecoponto } from '../services/api';
 
 const { width } = Dimensions.get('window');
 const CHAVE_FAVORITOS = '@reciclaspot:favoritos';
 
 export default function EcopontoDetailScreen({ route, navigation }: any) {
-  const ecoponto = route?.params?.ponto;
+  const pontoInicial: Ecoponto | undefined = route?.params?.ponto;
+  const ecopontoId = route?.params?.id || pontoInicial?.id;
+
+  const [ecoponto, setEcoponto] = useState<Ecoponto | undefined>(pontoInicial);
+  const [carregandoDetalhes, setCarregandoDetalhes] = useState<boolean>(false);
   const [favorito, setFavorito] = useState<boolean>(false);
+
+  // Busca dados aprofundados do ecoponto na API (GET /ecopontos/:id)
+  useEffect(() => {
+    const carregarDetalhes = async () => {
+      if (!ecopontoId) return;
+
+      setCarregandoDetalhes(true);
+      try {
+        const dadosCompletos = await ecopontoService.buscarPorId(ecopontoId);
+        setEcoponto((anterior) => ({
+          ...anterior,
+          ...dadosCompletos,
+        }));
+      } catch (error) {
+        console.log('Erro ao buscar detalhes do ecoponto:', error);
+      } finally {
+        setCarregandoDetalhes(false);
+      }
+    };
+
+    carregarDetalhes();
+  }, [ecopontoId]);
 
   // Verifica se este ecoponto já está salvo nos favoritos ao abrir a tela
   useEffect(() => {
@@ -83,16 +111,13 @@ export default function EcopontoDetailScreen({ route, navigation }: any) {
     }
   };
 
-
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
 
-      {/* Formas orgânicas verdes no topo */}
       <View style={styles.circleTopRight} />
       <View style={styles.circleTopLeft} />
 
-      {/* Cabeçalho Flutuante: Botão Voltar (<) e Botão Favoritar (Coração) */}
       <View style={styles.topHeader}>
         <TouchableOpacity
           style={styles.iconButton}
@@ -119,7 +144,6 @@ export default function EcopontoDetailScreen({ route, navigation }: any) {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        {/* Foto de Capa do Ecoponto */}
         <View style={styles.imageContainer}>
           <Image
             source={{
@@ -132,15 +156,19 @@ export default function EcopontoDetailScreen({ route, navigation }: any) {
           />
         </View>
 
-
-
-        {/* Título e Subtítulo */}
         <Text style={styles.title}>
           {ecoponto?.tituloTela || ecoponto?.titulo || 'Detalhes do Ecoponto'}
         </Text>
         <Text style={styles.subtitle}>{ecoponto?.subtitulo}</Text>
 
-        {/* Seção: Endereço por extenso (sem botão de rota) */}
+        {carregandoDetalhes && (
+          <ActivityIndicator
+            size="small"
+            color="#21B086"
+            style={{ marginBottom: 14 }}
+          />
+        )}
+
         <View style={styles.addressCard}>
           <Ionicons name="location" size={22} color="#21B086" />
           <Text style={styles.addressText}>
@@ -149,13 +177,11 @@ export default function EcopontoDetailScreen({ route, navigation }: any) {
           </Text>
         </View>
 
-        {/* Seção: Materiais Aceitos */}
         <Text style={styles.sectionHeader}>MATERIAIS ACEITOS</Text>
         <Text style={styles.bodyText}>
           {ecoponto?.materiaisAceitos || 'Informações em breve.'}
         </Text>
 
-        {/* Seção: Horário de Funcionamento */}
         <Text style={styles.sectionHeader}>HORÁRIO DE FUNCIONAMENTO 📅</Text>
         {ecoponto?.horarios?.map((horario: string, index: number) => (
           <Text key={index} style={styles.scheduleText}>
@@ -163,7 +189,6 @@ export default function EcopontoDetailScreen({ route, navigation }: any) {
           </Text>
         ))}
 
-        {/* Seção: Regras de Descarte */}
         <Text style={[styles.sectionHeader, { marginTop: 22 }]}>
           REGRAS DE DESCARTE ⚠️
         </Text>
@@ -337,3 +362,4 @@ const styles = StyleSheet.create({
     lineHeight: 18,
   },
 });
+

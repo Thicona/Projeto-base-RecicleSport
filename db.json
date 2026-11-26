@@ -1,0 +1,45 @@
+{
+  "ecopontos": [
+    {
+      "id": "oleo-1",
+      "material": "oleo",
+      "residuoId": "1",
+      "icone": "storefront",
+      "titulo": "1. Ponto de Coleta Supermercado",
+      "tituloTela": "Coleta em Supermercados",
+      "subtitulo": "(Redes Parceiras e Mercados)",
+      "endereco": "Av. Brasil, 500 - Centro",
+      "materiaisAceitos": "Óleo de soja, girassol, canola, milho e azeite usados.",
+      "horarios": ["Seg a Sáb das 08:00 às 21:00"],
+      "regras": ["Esperar esfriar", "Garrafa PET fechada", "Não misturar com água"]
+    },
+    {
+      "id": "1",
+      "material": "eletronico",
+      "residuoId": "2",
+      "icone": "power-plug",
+      "titulo": "1. Totem Papa-Celular",
+      "tituloTela": "Totem Papa-Celular",
+      "subtitulo": "(Shopping Centers e Metrô)",
+      "endereco": "Avenida Paulista, 1230 - Bela Vista, São Paulo - SP",
+      "imagem": "https://palmas.to.gov.br",
+      "materiaisAceitos": "Baterias de celular, pilhas, power banks, cabos e fones.",
+      "horarios": ["Seg a Sáb das 10:00 às 22:00", "Dom e Feriados das 14:00 às 20:00"],
+      "regras": ["Segurança de Dados", "Preparação do Item", "Condições do Resíduo"]
+    },
+    {
+      "id": "pilha-1",
+      "material": "pilhas",
+      "residuoId": "3",
+      "icone": "battery-charging",
+      "titulo": "1. Coletor Papa-Pilhas",
+      "tituloTela": "Coletor Papa-Pilhas",
+      "subtitulo": "(Farmácias e Drogarias)",
+      "endereco": "Rua das Flores, 120 - Centro",
+      "materiaisAceitos": "Pilhas AA, AAA, C, D e baterias 9V.",
+      "horarios": ["Seg a Dom das 08:00 às 22:00"],
+      "regras": ["Sem vazamento", "Isolar polos com fita"]
+    }
+  ],
+  "usuarios": []
+}

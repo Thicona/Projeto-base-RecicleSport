@@ -116,7 +116,7 @@ const LEGENDA_CORES = [
   { label: 'Resíduos não recicláveis ou contaminados', cor: '#8C8C8C' },
   { label: 'Resíduos de saúde', cor: '#D9D9D9' },
 ];
-export function MapaScreen({ navigation }: MapaScreenProps) {
+export default function MapaScreen({ navigation }: MapaScreenProps) {
   const [pontos, setPontos] = useState<PontoMapa[]>(PONTOS_INICIAIS);
   const [userLocation, setUserLocation] = useState<{
     latitude: number;
@@ -179,12 +179,11 @@ export function MapaScreen({ navigation }: MapaScreenProps) {
     <!DOCTYPE html>
     <html>
     <head>
-      <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="https://unpkg.com" />
       <script src="https://unpkg.com"></script>
       <style>
-        html, body, #map { height: 100%; width: 100%; margin: 0; padding: 0; }
+        html, body, #map { height: 100%; margin: 0; padding: 0; }
       </style>
     </head>
     <body>
@@ -217,10 +216,6 @@ export function MapaScreen({ navigation }: MapaScreenProps) {
     </html>
   `;
 
-  const mapDataUri = `data:text/html;charset=utf-8,${encodeURIComponent(
-    leafletHtml
-  )}`;
-
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.headerContainer}>
@@ -242,7 +237,7 @@ export function MapaScreen({ navigation }: MapaScreenProps) {
               </View>
             ) : (
               <iframe
-                src={mapDataUri}
+                srcDoc={leafletHtml}
                 style={{ width: '100%', height: '100%', border: 'none' }}
                 title="Mapa Interativo EcoPontos"
               />

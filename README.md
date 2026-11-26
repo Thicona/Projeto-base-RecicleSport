@@ -1,56 +1,44 @@
-# Welcome to your Expo app 👋
+# ♻️ ReciclaSpot
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aplicativo móvel desenvolvido em React Native + Expo para localização de ecopontos municipais, registro de descarte consciente e consulta offline de pontos de coleta.
 
-## Get started
+## Funcionalidades Entregues
+- **Fluxo de Entrada e Cadastro:** Telas de boas-vindas (`Welcome`) e cadastro de voluntário (`Voluntario`) com validação de formulário e persistência local.
+- **Mapa Interativo e GPS:** Geolocalização em tempo real (`expo-location`), pinos coloridos por categoria de resíduo e card flutuante de resumo.
+- **Resiliência Offline:** Armazenamento local com `AsyncStorage` permitindo consultar ecopontos mesmo em Modo Avião.
+- **Integração REST & Clean Code:** Consumo de API via `Axios` com timeout, tratamento de falhas, Pull-to-Refresh e testes unitários com `Jest`.
 
-1. Install dependencies
+## Tecnologias Utilizadas
+- React Native & Expo (TypeScript)
+- React Navigation (Stack + Bottom Tabs)
+- React Native Maps & Leaflet (Web)
+- Expo Location & AsyncStorage
+- Axios & Jest
 
-   ```bash
-   npm install
-   ```
+## Capturas de Tela
 
-2. Start the app
+### Tela Inicial (Listagem e Filtro de Ecopontos)
+![Tela Inicial](./assets/images/print-Home.png)
 
-   ```bash
-   npx expo start
-   ```
+### Tratamento de Erro de Conexão (Resiliência de Rede)
+![Tela de Erro](./assets/images/print-HomeErro.png)
 
-In the output, you'll find options to open the app in a
+### Testes Unitários (Jest)
+![Testes Unitários](./assets/images/tests-jest.png)
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Como Executar Localmente
+\`\`\`bash
+# Instalar dependências
+npm install
 
-## Get a fresh project
+# Rodar os testes unitários
+npm test
 
-When you're ready, run:
+# Iniciar o projeto
+npx expo start
+\`\`\`
 
-```bash
-npm run reset-project
-```
+## Download do Aplicativo (APK Android)
+- [Baixar APK - Versão Preview (Demo Day)](COLE_AQUI_O_LINK_DO_SEU_APK_DO_EXPO)
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
-
-### Other setup steps
-
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.

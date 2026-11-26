@@ -14,7 +14,9 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Usuario } from './voluntario';
+interface Usuario {
+  nome?: string;
+}
 
 interface PerfilScreenProps {
   usuario?: Usuario;
